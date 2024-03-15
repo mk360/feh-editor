@@ -1,12 +1,12 @@
 const tiles = Array.from({ length: 48 }).fill({
-    tileType: "plain",
+    tileType: "ground",
     defensive: false,
-    trench: false
+    trench: false,
 });
 
 const teamSlots = {
-    team1: [],
-    team2: []
+    team1: Array.from({ length: 4 }),
+    team2: Array.from({ length: 4 })
 };
 
 function getMapObject() {

@@ -12,6 +12,11 @@ body {
 
 .map-params {
     min-width: 20vw;
+    border-radius: 6px;
+}
+
+.starting-tile {
+    border-radius: 6px;
 }
 
 .map-tile {
@@ -32,4 +37,36 @@ body {
     background-repeat: no-repeat;
     cursor: pointer;
     filter: none;
+}
+
+.action-container {
+    margin-top: 6px;
+}
+
+.command-button {
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    border: none;
+    font-weight: 600;
+}
+
+#export {
+    background-color: #54DFF4;
+    cursor: pointer;
+}
+
+#export:hover {
+    background-color: #43b1c2;
+}
+
+#save {
+    color: white;
+    background-color: #FA4D69;
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+#save:hover {
+    background-color: #d33f58;
 }

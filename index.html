@@ -6,27 +6,27 @@
     <body>
         <div id="map-bg"></div>
         <fieldset class="map-params">
-            <legend>Test</legend>
+            <legend>Tile Settings</legend>
             <ul>
                 <li>Tile Type: <select id="tile-type">
-                    <option>Ground</option>
-                    <option>Forest</option>
-                    <option>Wall</option>
-                    <option>Void</option>
+                    <option value="ground">Ground</option>
+                    <option value="forest">Forest</option>
+                    <option value="wall">Wall</option>
+                    <option value="void">Void</option>
                 </select></li>
                 <li>
                     <div><input type="checkbox" id="trench" /> Tile has a Trench</div>
                     <div><input type="checkbox" id="defensive" /> Tile is a Defensive Tile</div>
                 </li>
             </ul>
-            <fieldset>
+            <fieldset class="starting-tile">
                 <legend>Set as a starting tile for...</legend>
                 <ul>
                     <li>
                         Team <select id="team">
                             <option></option>
-                            <option>Team 1</option>
-                            <option>Team 2</option>
+                            <option value="1">Team 1</option>
+                            <option value="2">Team 2</option>
                         </select>
                     </li>
                     <li>Team Slot <select id="slot">
@@ -38,8 +38,9 @@
                     </select></li>
                 </ul>
             </fieldset>
+            <div class="action-container"><button id="save" class="command-button">Save Tile</button><button id="export" class="command-button">Export Map</button></div>
         </fieldset>
         <script src="./dom.js"></script>
-        <script src="./editor.js"></script>
+        <script src="./data.js"></script>
     </body>
 </html>
