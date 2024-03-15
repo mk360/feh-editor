@@ -1,0 +1,35 @@
+#map-bg {
+    height: 720px;
+    width: 540px;
+    background-image: url("./Z0001.webp");
+    background-repeat: no-repeat;
+}
+
+body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.map-params {
+    min-width: 20vw;
+}
+
+.map-tile {
+    height: 90px;
+    width: 90px;
+    background: none;
+    outline: none;
+    border: 1px solid white;
+}
+
+.highlighted {
+    background-image: url("tile-highlight.png");
+    filter: brightness(1.5) hue-rotate(220deg);
+}
+
+.map-tile:hover {
+    background-image: url("tile-highlight.png");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    filter: none;
+}

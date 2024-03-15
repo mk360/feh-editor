@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./index.css" />
+    </head>
+    <body>
+        <div id="map-bg"></div>
+        <fieldset class="map-params">
+            <legend>Test</legend>
+            <ul>
+                <li>Tile Type: <select id="tile-type">
+                    <option>Ground</option>
+                    <option>Forest</option>
+                    <option>Wall</option>
+                    <option>Void</option>
+                </select></li>
+                <li>
+                    <div><input type="checkbox" id="trench" /> Tile has a Trench</div>
+                    <div><input type="checkbox" id="defensive" /> Tile is a Defensive Tile</div>
+                </li>
+            </ul>
+            <fieldset>
+                <legend>Set as a starting tile for...</legend>
+                <ul>
+                    <li>
+                        Team <select id="team">
+                            <option></option>
+                            <option>Team 1</option>
+                            <option>Team 2</option>
+                        </select>
+                    </li>
+                    <li>Team Slot <select id="slot">
+                        <option></option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select></li>
+                </ul>
+            </fieldset>
+        </fieldset>
+        <script src="./dom.js"></script>
+        <script src="./editor.js"></script>
+    </body>
+</html>
