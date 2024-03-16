@@ -1,4 +1,4 @@
-const mapBackground = document.getElementById("map-bg");
+const mapBackground = document.getElementById("map");
 const defensiveCheckbox = document.getElementById("defensive");
 const trenchCheckbox = document.getElementById("trench");
 const tileTypeSelector = document.getElementById("tile-type");
@@ -20,7 +20,10 @@ mapBackground.onclick = function(e) {
     btn.classList.add("highlighted");
     const tile = tiles[+btn.id - 1];
     defensiveCheckbox.checked = tile.defensive;
+    trenchCheckbox.checked = tile.trench;
     tileTypeSelector.value = tile.tileType;
+
+    controlSpecialTiles(tile.tileType);
 
     if (teamSlots.team1.includes(+btn.id)) {
         sideSelector.value = 1;
@@ -59,13 +62,12 @@ saveTileButton.onclick = function() {
     }
 };
 
-tileTypeSelector.onchange = function(e) {
-    const { value } = this;
-    if (value !== "Ground") {
+function controlSpecialTiles(tileValue) {
+    if (tileValue !== "ground") {
         trenchCheckbox.disabled = true;
         trenchCheckbox.checked = false;
 
-        if (["Wall", "Void"].includes(value)) {
+        if (["wall", "void"].includes(tileValue)) {
             defensiveCheckbox.disabled = true;
             defensiveCheckbox.checked = false;        
         }
@@ -73,4 +75,35 @@ tileTypeSelector.onchange = function(e) {
         trenchCheckbox.disabled = false;
         defensiveCheckbox.disabled = false;
     }
+}
+
+tileTypeSelector.onchange = function(e) {
+    const { value } = this;
+    controlSpecialTiles(value);
 };
+
+document.getElementById("prompt-input").onchange = function(e) {
+    const { target: { files } } = e;
+    const reader = new FileReader();
+    reader.onload = function() {
+        document.getElementById("map-bg").src = reader.result;
+        document.getElementById("map-bg").alt = files[0].name;
+        document.getElementById("map").classList.add("loaded");
+        document.body.removeChild(document.getElementById("load-map"));
+        filename = files[0].name.replace("webp", "json");
+    };
+
+    reader.readAsDataURL(files[0]);
+};
+
+exportMapButton.onclick = function() {
+    const obj = getMapObject();
+    const objString = JSON.stringify(obj, null, 2);
+    const dataString = `data:text/json;charset=utf-8,${encodeURIComponent(objString)}`;
+    const anchor = document.createElement("a");
+    anchor.download = filename;
+    anchor.href = dataString;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+}

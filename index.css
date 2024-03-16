@@ -1,13 +1,48 @@
-#map-bg {
+#map {
     height: 720px;
     width: 540px;
-    background-image: url("./Z0001.webp");
-    background-repeat: no-repeat;
+    background-color: gray;
+}
+
+#map.loaded {
+    background: none;
+}
+
+.prompt {
+    color: white;
+    font-size: 2rem;
+}
+
+#map-bg {
+    position: absolute;
+    z-index: -1;
+    height: 720px;
+    width: 540px;
+}
+
+#prompt-input {
+    color: white;
+    font-size: 1.7rem;
+}
+
+#load-map {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 body {
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .map-params {

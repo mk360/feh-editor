@@ -4,7 +4,13 @@
         <link rel="stylesheet" href="./index.css" />
     </head>
     <body>
-        <div id="map-bg"></div>
+        <div id="load-map">
+            <p class="prompt">Please Select a Map File</p>
+            <div><input id="prompt-input" type="file" accept="image/webp" /></div>
+        </div>
+        <div id="map">
+            <img id="map-bg" alt="" src="" />
+        </div>
         <fieldset class="map-params">
             <legend>Tile Settings</legend>
             <ul>
