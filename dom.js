@@ -7,18 +7,27 @@ const teamSlotSelector = document.getElementById("slot");
 const saveTileButton = document.getElementById("save");
 const exportMapButton = document.getElementById("export");
 
-for (let i = 1; i < 49; i++) {
-    const btn = document.createElement("button");
-    btn.id = i;
-    btn.classList.add("map-tile");
-    mapBackground.appendChild(btn);
+function getTileIndex(x, y) {
+    return (y - 1) * 6 + x;
+}
+
+for (let y = 1; y <= 8; y++) {
+    for (let x = 1; x <= 6; x++) {
+        const btn = document.createElement("button");
+        btn.id = `${x}-${y}`;
+        btn.classList.add("map-tile");
+        mapBackground.appendChild(btn);
+    }
 }
 
 mapBackground.onclick = function(e) {
     mapBackground.getElementsByClassName("highlighted")[0]?.classList.remove("highlighted");
     const btn = e.target;
     btn.classList.add("highlighted");
-    const tile = tiles[+btn.id - 1];
+    const [x, y] = btn.id.split("-").map(Number);
+    const tileIndex = getTileIndex(x, y);
+    console.log({ x, y, tileIndex })
+    const tile = tiles[tileIndex];
     defensiveCheckbox.checked = tile.defensive;
     trenchCheckbox.checked = tile.trench;
     tileTypeSelector.value = tile.tileType;
@@ -40,6 +49,8 @@ mapBackground.onclick = function(e) {
 saveTileButton.onclick = function() {
     const highlightedTile = mapBackground.getElementsByClassName("highlighted")[0];
     if (highlightedTile) {
+        const [x, y] = highlightedTile.id.split("-").map(Number);
+        const tileIndex = getTileIndex(x, y);
         const defensive = defensiveCheckbox.checked;
         const trench = trenchCheckbox.checked;
         const tileType = tileTypeSelector.value;
@@ -53,10 +64,10 @@ saveTileButton.onclick = function() {
         };
 
         if (team && slot) {
-            teamSlots[`team${team}`][slot - 1] = +highlightedTile.id;
+            teamSlots[`team${team}`][slot - 1] = highlightedTile.id;
         }
 
-        tiles[+highlightedTile.id - 1] = tilePayload;
+        tiles[tileIndex] = tilePayload;
     } else {
         alert("Please select a tile to edit");
     }

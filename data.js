@@ -16,16 +16,18 @@ function getMapObject() {
         tileData: [],
         spawnLocations: {
             team1: teamSlots.team1.map((tile) => {
-                const y = Math.floor(tile / 6);
-                const x = tile - y * 6;
-
-                return { x, y: y + 1 }
+                const [x, y] = tile.split("-");
+                return {
+                    x: +x,
+                    y: +y,
+                };
             }),
             team2: teamSlots.team2.map((tile) => {
-                const y = Math.floor(tile / 6);
-                const x = tile - y * 6;
-
-                return { x, y: y + 1 }
+                const [x, y] = tile.split("-");
+                return {
+                    x: +x,
+                    y: +y,
+                };
             }),
         }
     };
