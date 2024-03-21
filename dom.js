@@ -1,4 +1,4 @@
-const mapBackground = document.getElementById("map");
+const mapBackground = document.getElementById("map-container");
 const defensiveCheckbox = document.getElementById("defensive");
 const trenchCheckbox = document.getElementById("trench");
 const tileTypeSelector = document.getElementById("tile-type");
@@ -99,7 +99,6 @@ document.getElementById("prompt-input").onchange = function(e) {
     reader.onload = function() {
         document.getElementById("map-bg").src = reader.result;
         document.getElementById("map-bg").alt = files[0].name;
-        document.getElementById("map").classList.add("loaded");
         document.body.removeChild(document.getElementById("load-map"));
         filename = files[0].name.replace("webp", "json");
     };

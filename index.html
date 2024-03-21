@@ -8,9 +8,6 @@
             <p class="prompt">Please Select a Map File</p>
             <div><input id="prompt-input" type="file" accept="image/webp" /></div>
         </div>
-        <div id="map">
-            <img id="map-bg" alt="" src="" />
-        </div>
         <fieldset class="map-params">
             <legend>Tile Settings</legend>
             <ul>
@@ -46,6 +43,19 @@
             </fieldset>
             <div class="action-container"><button id="save" class="command-button">Save Tile</button><button id="export" class="command-button">Export Map</button></div>
         </fieldset>
+        <div id="map">
+            <div id="map-container">
+                <img id="map-bg" alt="" src="" />
+            </div>
+            <div id="map-tools">
+                <button>Set Background</button>
+                <div>
+                    <button>Previous Background</button>
+                    <button>Next Background</button>
+                </div>
+                <button>Save</button>
+            </div>
+        </div>
         <script src="./dom.js"></script>
         <script src="./data.js"></script>
     </body>
