@@ -7,11 +7,18 @@ html {
     font-size: 20px;
 }
 
-.test {
-    
+.section {
+    background-image: url("./assets/title-bg.png");
+    background-size: 100% 100%;
+    text-align: center;
+    background-repeat: no-repeat;
 }
 
-.tile-button:hover {
+.tile-title {
+    text-align: center;
+}
+
+.tile-button:hover, .tile-type:checked + label {
     background-image: url("./assets/image\ 19.png");
     background-size: 130% 110%;
     background-repeat: no-repeat;
@@ -30,8 +37,9 @@ html {
 }
 
 .square {
-    height: 80px;
-    width: 80px;
+    height: 90px;
+    width: 90px;
+    position: relative;
 }
 
 #map {
@@ -137,18 +145,13 @@ body {
 }
 
 .tile-type + label {
-    display: block;
+    display: inline-block;
     width: fit-content;
     padding: 10px;
 }
 
 .tile-type + label:hover {
     cursor: pointer;
-}
-
-.tile-type:checked + label {
-    color: red;
-    font-size: 30px;
 }
 
 .highlighted {
@@ -189,6 +192,13 @@ body {
     background-color: #FA4D69;
     margin-right: 6px;
     cursor: pointer;
+}
+
+hr {
+    background-image: url("./assets/separator.png");
+    background-size: contain;
+    height: 2px;
+    border: none;
 }
 
 #save:hover {
