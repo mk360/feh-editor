@@ -4,45 +4,62 @@
         <link rel="stylesheet" href="./index.css" />
     </head>
     <body>
-        <div id="load-map">
+        <!-- <div id="load-map">
             <p class="prompt">Please Select a Map File</p>
             <div><input id="prompt-input" type="file" accept="image/webp" /></div>
+        </div> -->
+        <div>
+            <h3 class="test">
+                Type de cases
+            </h3>
+            <div>
+                <input type="radio" class="tile-type" name="tile-type" id="ground" />
+                <label class="tile-button" for="ground">
+                    <div class="square ground"></div>
+                    <p>Ground</p>
+                </label>
+                <input type="radio" class="tile-type" name="tile-type" id="forest" />
+                <label class="tile-button" for="forest">
+                    <div class="square forest"></div>
+                    Forest
+                </label>
+                <input type="radio" class="tile-type" name="tile-type" id="void" />
+                <label class="tile-button" for="void">
+                    <div class="square void"></div>
+                    Void
+                </label>
+                <input type="radio" class="tile-type" name="tile-type" id="wall" />
+                <label class="tile-button" for="wall">
+                    <div class="square wall"></div>
+                    Wall
+                </label>
+                <!-- <button class="bonjour">
+                    <div class="square ground"></div>
+                    <p>Ground</p>
+                </button>
+                <button class="bonjour">
+                    <div class="square forest"></div>
+                    <p>Forest</p>
+                </button>
+                <button class="bonjour">
+                    <div class="square void"></div>
+                    <p>Void</p>
+                </button>
+                <button class="bonjour">
+                    <div class="square wall"></div>
+                    <p>Wall</p>
+                </button> -->
+            </div>
+            <input type="checkbox" id="defensive" class="added-elements" />
+            <label for="defensive">Defensive Tile</label>
+            <input type="checkbox" id="trench" class="added-elements" />
+            <label for="trench">Trench</label>
+            <h3>Starting Tiles</h3>
+            <h4>Team 1</h4>
+            <div></div>
+            <h4>Team 2</h4>
+            <div></div>
         </div>
-        <fieldset class="map-params">
-            <legend>Tile Settings</legend>
-            <ul>
-                <li>Tile Type: <select id="tile-type">
-                    <option value="ground">Ground</option>
-                    <option value="forest">Forest</option>
-                    <option value="wall">Wall</option>
-                    <option value="void">Void</option>
-                </select></li>
-                <li>
-                    <div><input type="checkbox" id="trench" /> Tile has a Trench</div>
-                    <div><input type="checkbox" id="defensive" /> Tile is a Defensive Tile</div>
-                </li>
-            </ul>
-            <fieldset class="starting-tile">
-                <legend>Set as a starting tile for...</legend>
-                <ul>
-                    <li>
-                        Team <select id="team">
-                            <option></option>
-                            <option value="1">Team 1</option>
-                            <option value="2">Team 2</option>
-                        </select>
-                    </li>
-                    <li>Team Slot <select id="slot">
-                        <option></option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select></li>
-                </ul>
-            </fieldset>
-            <div class="action-container"><button id="save" class="command-button">Save Tile</button><button id="export" class="command-button">Export Map</button></div>
-        </fieldset>
         <div id="map">
             <div id="map-container">
                 <img id="map-bg" alt="" src="" />

@@ -7,12 +7,39 @@ html {
     font-size: 20px;
 }
 
+.test {
+    
+}
+
+.tile-button:hover {
+    background-image: url("./assets/image\ 19.png");
+    background-size: 130% 110%;
+    background-repeat: no-repeat;
+    background-position: -14px;
+    cursor: pointer;
+}
+
+.tile-button {
+    font-family: FEH;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.4);
+    /* border-image: linear-gradient(#3CD6FE, #B0FBFF) 60; */
+    border: none;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.square {
+    height: 80px;
+    width: 80px;
+}
+
 #map {
     min-height: 720px;
     max-width: 540px;
     flex: 0.8;
     border: 8px solid;
-    border-image: repeating-linear-gradient(-90deg, #648B90 0%, #2F4C56 9%, #75553C 19%, #C5A481 36%, #F1D99F 41%, #F8F1DE 49%, #F1D99F 55%, #C5A481 62%, #75553C 81%, #2F4C56 91%, #608D93 100%) 60;
+    border-image: linear-gradient(-90deg, #648B90 0%, #2F4C56 9%, #75553C 19%, #C5A481 36%, #F1D99F 41%, #F8F1DE 49%, #F1D99F 55%, #C5A481 62%, #75553C 81%, #2F4C56 91%, #608D93 100%) 15;
     background-color: rgba(133, 163, 167, 0.6);
 }
 
@@ -63,7 +90,7 @@ body {
     display: flex;
     justify-content: space-around;
     background-image: url("./assets/bg.png");
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: FEH;
     color: white;
     -webkit-text-stroke-width: 0.5px;
@@ -87,13 +114,50 @@ body {
     border: 1px solid white;
 }
 
+.wall {
+    background-color: rgba(141, 147, 149, 0.4);
+}
+
+.void {
+    background-color: rgba(245, 60, 50, 0.4);
+}
+
+.forest {
+    background-color: rgba(41, 193, 85, 0.4);
+}
+
+.ground {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.tile-type {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+.tile-type + label {
+    display: block;
+    width: fit-content;
+    padding: 10px;
+}
+
+.tile-type + label:hover {
+    cursor: pointer;
+}
+
+.tile-type:checked + label {
+    color: red;
+    font-size: 30px;
+}
+
 .highlighted {
-    background-image: url("tile-highlight.png");
+    background-image: url("./tile-highlight.png");
     filter: brightness(1.5) hue-rotate(220deg);
 }
 
 .map-tile:hover {
-    background-image: url("tile-highlight.png");
+    background-image: url("./tile-highlight.png");
     background-repeat: no-repeat;
     cursor: pointer;
     filter: none;
