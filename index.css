@@ -63,7 +63,7 @@ h4 {
 }
 
 .tile-button:hover, .tile-type:checked + label {
-    background-image: url("./assets/image\ 19.png");
+    background-image: url("./assets/button-background.png");
     background-size: 130% 110%;
     background-repeat: no-repeat;
     background-position: -14px;
@@ -87,23 +87,34 @@ h4 {
 }
 
 #map {
-    min-height: 720px;
-    max-width: 540px;
-    flex: 0.8;
-    border: 8px solid;
-    border-image: linear-gradient(-90deg, #648B90 0%, #2F4C56 9%, #75553C 19%, #C5A481 36%, #F1D99F 41%, #F8F1DE 49%, #F1D99F 55%, #C5A481 62%, #75553C 81%, #2F4C56 91%, #608D93 100%) 15;
-    background-color: rgba(133, 163, 167, 0.6);
+    max-width: fit-content;
+    max-height: fit-content;
+    padding: 8px;
+    border-radius: 8px;
+    background-image: linear-gradient(90deg, #648b90ff 0%, #2f4c56ff 9%, #75553cff 19%, #c5a481ff 36%, #f1d99fff 41%, #f8f1deff 49%, #f1d99fff 55%, #c5a481ff 62%, #75553cff 81%, #2f4c56ff 91%, #608d93ff 100%);
+    background-color: #628a8e;
+    outline: 1px solid black;
+}
+
+#map-editor-bg {
+    background-color: #85a3a799;
+    padding: 24px;
+    outline: 1px solid black;
 }
 
 #map-container {
-    display: flex;
-    flex-wrap: wrap;
+    outline: solid 1px #f9f4e399;
+    border-radius: 8px;
+    width: 540px;
+    height: 720px;
+    background-color: #27393bcc;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: inset 2px 2px 8px 0px #00000080;
 }
 
 #map-tools {
-    flex: 0.2;
     padding-top: 20px;
-    padding-bottom: 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -220,12 +231,6 @@ body {
     width: 90px;
 }
 
-.team-slot {
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 10px;
-    border-radius: 16px;
-}
-
 .action-container {
     margin-top: 6px;
 }
@@ -263,4 +268,22 @@ hr {
 
 #save:hover {
     background-color: #d33f58;
+}
+
+.team-slot-button {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 16px;
+}
+
+input[name='team-slot']:hover + label, input[name='team-slot']:checked + label {
+    background-image: url("./assets/button-background.png");
+    background-size: 130% 110%;
+    background-repeat: no-repeat;
+    background-position: -14px;
+    cursor: pointer;
+}
+
+.team-slot {
+    display: none;
 }

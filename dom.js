@@ -1,7 +1,7 @@
 const mapBackground = document.getElementById("map-container");
 const defensiveCheckbox = document.getElementById("defensive");
 const trenchCheckbox = document.getElementById("trench");
-// const tileTypeSelector = document.getElementById("tile-type");
+const tileTypeSelector = document.getElementById("tile-type");
 const sideSelector = document.getElementById("team");
 const teamSlotSelector = document.getElementById("slot");
 // const saveTileButton = document.getElementById("save");
