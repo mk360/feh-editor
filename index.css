@@ -7,6 +7,17 @@ html {
     font-size: 20px;
 }
 
+.defensive-image, .trench-image {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
+}
+
+.defensive-image.display, .trench-image.display {
+    display: unset;
+}
+
 .section {
     background-image: url("./assets/title-bg.png");
     background-size: 100% 100%;
@@ -14,8 +25,41 @@ html {
     background-repeat: no-repeat;
 }
 
-.tile-title {
+.tile-type-label {
     text-align: center;
+}
+
+.tile-property {
+    display: none;
+}
+
+h4 {
+    margin: 0;
+    margin-top: 10px;
+}
+
+.tile-property + label {
+    cursor: pointer;
+}
+
+.tile-property + label * {
+    vertical-align: middle;
+}
+
+.tile-property + label .checkbox-img {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+}
+
+.tile-property + label .checkbox-img {
+    background-image: url("./assets/checkbox-unchecked.png");
+}
+
+.tile-property:checked + label .checkbox-img {
+    background-image: url("./assets/checkbox.png");
 }
 
 .tile-button:hover, .tile-type:checked + label {
@@ -155,15 +199,31 @@ body {
 }
 
 .highlighted {
-    background-image: url("./tile-highlight.png");
+    background-image: url("./assets/tile-highlight.png");
     filter: brightness(1.5) hue-rotate(220deg);
 }
 
 .map-tile:hover {
-    background-image: url("./tile-highlight.png");
+    background-image: url("./assets/tile-highlight.png");
     background-repeat: no-repeat;
     cursor: pointer;
     filter: none;
+}
+
+.team-slot-selector {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.summoner {
+    width: 90px;
+}
+
+.team-slot {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 16px;
 }
 
 .action-container {

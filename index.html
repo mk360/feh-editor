@@ -4,10 +4,6 @@
         <link rel="stylesheet" href="./index.css" />
     </head>
     <body>
-        <!-- <div id="load-map">
-            <p class="prompt">Please Select a Map File</p>
-            <div><input id="prompt-input" type="file" accept="image/webp" /></div>
-        </div> -->
         <div>
             <h3 class="section">
                 Tile Type
@@ -15,55 +11,74 @@
             <div>
                 <input type="radio" class="tile-type" name="tile-type" id="ground" />
                 <label class="tile-button" for="ground">
-                    <div class="square ground"></div>
-                    <p class="tile-title">Ground</p>
+                    <div class="square ground">
+                        <img class="defensive-image" src="./assets/defensive.png" />
+                        <img class="trench-image" src="./assets/trench.png" />
+                    </div>
+                    <p class="tile-type-label">Ground</p>
                 </label>
                 <input type="radio" class="tile-type" name="tile-type" id="forest" />
                 <label class="tile-button" for="forest">
-                    <div class="square forest"></div>
-                    <p class="tile-title">Forest</p>
+                    <div class="square forest">
+                        <img class="defensive-image" src="./assets/defensive.png" />
+                    </div>
+                    <p class="tile-type-label">Forest</p>
                 </label>
                 <input type="radio" class="tile-type" name="tile-type" id="void" />
                 <label class="tile-button" for="void">
-                    <div class="square void"></div>
-                    <p class="tile-title">Void</p>
+                    <div class="square void">
+                    </div>
+                    <p class="tile-type-label">Void</p>
                 </label>
                 <input type="radio" class="tile-type" name="tile-type" id="wall" />
                 <label class="tile-button" for="wall">
-                    <div class="square wall"></div>
-                    <p class="tile-title">Wall</p>
+                    <div class="square wall">
+                    </div>
+                    <p class="tile-type-label">Wall</p>
                 </label>
-                <!-- <button class="bonjour">
-                    <div class="square ground"></div>
-                    <p>Ground</p>
-                </button>
-                <button class="bonjour">
-                    <div class="square forest"></div>
-                    <p>Forest</p>
-                </button>
-                <button class="bonjour">
-                    <div class="square void"></div>
-                    <p>Void</p>
-                </button>
-                <button class="bonjour">
-                    <div class="square wall"></div>
-                    <p>Wall</p>
-                </button> -->
             </div>
-            <input type="checkbox" id="defensive" class="added-elements" />
-            <label for="defensive">Defensive Tile</label>
-            <input type="checkbox" id="trench" class="added-elements" />
-            <label for="trench">Trench</label>
+            <input type="checkbox" id="defensive" class="tile-property" />
+            <label for="defensive">
+                <div class="checkbox-img"></div>
+                <span>Defensive Tile</span>
+            </label>
+            <input type="checkbox" id="trench" class="tile-property" />
+            <label for="trench">
+                <div class="checkbox-img"></div>
+                <span>Trench</span>
+            </label>
             <h3 class="section">Starting Tiles</h3>
             <h4>Team 1</h4>
             <hr />
-            <div>
-
+            <div class="team-slot-selector">
+                <div class="team-slot">
+                    <img class="summoner" src="./assets/blue-summoner.png" />
+                </div>
+                <div class="team-slot">
+                    <img class="summoner" src="./assets/blue-summoner.png" />
+                </div>
+                <div class="team-slot">
+                    <img class="summoner" src="./assets/blue-summoner.png" />
+                </div>
+                <div class="team-slot">
+                    <img class="summoner" src="./assets/blue-summoner.png" />
+                </div>
             </div>
             <h4>Team 2</h4>
             <hr />
-            <div>
-
+            <div class="team-slot-selector">
+                <div class="team-slot">
+                    <img class="summoner" src="./assets/red-summoner.png" />
+                </div>
+                <div class="team-slot">
+                    <img class="summoner" src="./assets/red-summoner.png" />
+                </div>
+                <div class="team-slot">
+                    <img class="summoner" src="./assets/red-summoner.png" />
+                </div>
+                <div class="team-slot">
+                    <img class="summoner" src="./assets/red-summoner.png" />
+                </div>
             </div>
         </div>
         <div id="map">
