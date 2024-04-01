@@ -1,9 +1,9 @@
 const mapBackground = document.getElementById("map-container");
 const defensiveCheckbox = document.getElementById("defensive");
 const trenchCheckbox = document.getElementById("trench");
-const tileTypeSelector = document.getElementById("tile-type");
+const tileTypeSelectors = document.querySelectorAll("input[name='tile-type']");
 const sideSelector = document.getElementById("team");
-const teamSlotSelector = document.getElementById("slot");
+const teamSlotSelectors = document.querySelectorAll("input[name='team-slot']");
 // const saveTileButton = document.getElementById("save");
 const exportMapButton = document.getElementById("export");
 
@@ -19,6 +19,43 @@ for (let y = 1; y <= 8; y++) {
         mapBackground.appendChild(btn);
     }
 }
+
+let latestSlotValue = "";
+
+teamSlotSelectors.forEach((element) => {
+    element.onclick = (e) => {
+        if (element.checked && element.id === latestSlotValue) {
+            element.checked = false;
+            latestSlotValue = "";
+        } else {
+            latestSlotValue = element.id;
+        }
+    }
+});
+
+function controlSpecialTiles(tileType) {
+    trenchCheckbox.disabled = tileType !== "ground";
+    trenchCheckbox.checked = tileType !== "ground" ? false : trenchCheckbox.checked;
+    defensiveCheckbox.disabled = !["ground", "forest"].includes(tileType);
+    defensiveCheckbox.checked = defensiveCheckbox.disabled ? false : defensiveCheckbox.checked;
+    if (trenchCheckbox.disabled) {
+        Array.from(document.getElementsByClassName("trench-image")).forEach((el) => {
+            el.classList.remove("display");
+        });
+    }
+
+    if (defensiveCheckbox.disabled) {
+        Array.from(document.getElementsByClassName("defensive-image")).forEach((el) => {
+            el.classList.remove("display");
+        });
+    }
+}
+
+document.getElementById("bonjour").onclick = function(e) {
+    if (e.target.nodeName === "INPUT") {
+        controlSpecialTiles(e.target.id);
+    } 
+};
 
 trenchCheckbox.onchange = function(e) {
     const previewTrenchTileTypes = document.getElementsByClassName("trench-image");
@@ -52,77 +89,65 @@ defensiveCheckbox.onchange = function(e) {
     }
 }
 
-mapBackground.onclick = function(e) {
-    mapBackground.getElementsByClassName("highlighted")[0]?.classList.remove("highlighted");
-    const btn = e.target;
-    btn.classList.add("highlighted");
-    const [x, y] = btn.id.split("-").map(Number);
-    const tileIndex = getTileIndex(x, y);
-    const tile = tiles[tileIndex];
-    defensiveCheckbox.checked = tile.defensive;
-    trenchCheckbox.checked = tile.trench;
-    tileTypeSelector.value = tile.tileType;
-
-    controlSpecialTiles(tile.tileType);
-
-    if (teamSlots.team1.includes(+btn.id)) {
-        sideSelector.value = 1;
-        teamSlotSelector.value = teamSlots.team1.indexOf(+btn.id) + 1;
-    } else if (teamSlots.team2.includes(+btn.id)) {
-        sideSelector.value = 2;
-        teamSlotSelector.value = teamSlots.team2.indexOf(+btn.id) + 1;
-    } else {
-        sideSelector.value = "";
-        teamSlotSelector.value = "";
-    }
-};
-
-// saveTileButton.onclick = function() {
-//     const highlightedTile = mapBackground.getElementsByClassName("highlighted")[0];
-//     if (highlightedTile) {
-//         const [x, y] = highlightedTile.id.split("-").map(Number);
-//         const tileIndex = getTileIndex(x, y);
-//         const defensive = defensiveCheckbox.checked;
-//         const trench = trenchCheckbox.checked;
-//         const tileType = tileTypeSelector.value;
-//         const team = sideSelector.value;
-//         const slot = +teamSlotSelector.value;
-//         const tileString = tileType.toLowerCase();
-//         const tilePayload = {
-//             tileType: tileString,
-//             defensive,
-//             trench,
-//         };
-
-//         if (team && slot) {
-//             teamSlots[`team${team}`][slot - 1] = highlightedTile.id;
-//         }
-
-//         tiles[tileIndex] = tilePayload;
-//     } else {
-//         alert("Please select a tile to edit");
-//     }
-// };
-
-function controlSpecialTiles(tileValue) {
-    if (tileValue !== "ground") {
-        trenchCheckbox.disabled = true;
-        trenchCheckbox.checked = false;
-
-        if (["wall", "void"].includes(tileValue)) {
-            defensiveCheckbox.disabled = true;
-            defensiveCheckbox.checked = false;        
-        }
-    } else {
-        trenchCheckbox.disabled = false;
-        defensiveCheckbox.disabled = false;
-    }
+mapBackground.oncontextmenu = function(e) {
+    console.log(e);
+    e.preventDefault();
 }
 
-// tileTypeSelector.onchange = function(e) {
-//     const { value } = this;
-//     controlSpecialTiles(value);
-// };
+mapBackground.onclick = function(e) {
+    const btn = e.target;
+    const [x, y] = btn.id.split("-").map(Number);
+    const tileIndex = getTileIndex(x, y) - 1;
+    const tile = tiles[tileIndex];
+    const selectedTileType = document.querySelector("input[name='tile-type']:checked").id;
+    const teamSlotElement = document.querySelector("input[name='team-slot']:checked");
+    const saveData = {
+        tileType: selectedTileType,
+        defensive: defensiveCheckbox.checked,
+        trench: trenchCheckbox.checked,
+    };
+    if (teamSlotElement) {
+        let teamSlot = teamSlotElement.id;
+        const [slot, team] = teamSlot.split("-");
+        teamSlots[team][+slot] = {
+            x,
+            y
+        };
+    }
+    tiles[tileIndex] = saveData;
+
+    displayTileSettings({
+        defensive: defensiveCheckbox.checked,
+        trench: trenchCheckbox.checked,
+        tileType: selectedTileType,
+        id: btn.id
+    });
+};
+
+function displayTileSettings({ defensive, trench, tileType, id }) {
+    const button = document.getElementById(id);
+    while (button.children.length) {
+        button.removeChild(button.firstChild);
+    }
+
+    const div = document.createElement("div");
+    div.classList.add("square", tileType);
+    if (defensive) {
+        const defensiveImage = document.createElement("img");
+        defensiveImage.classList.add("defensive-image", "display-cell");
+        defensiveImage.src = "./assets/defensive.png";
+        div.appendChild(defensiveImage);
+    }
+
+    if (trench) {
+        const trenchImage = document.createElement("img");
+        trenchImage.classList.add("trench-image", "display-cell");
+        trenchImage.src = "./assets/trench.png";
+        div.appendChild(trenchImage);
+    }
+
+    button.appendChild(div);
+}
 
 // document.getElementById("prompt-input").onchange = function(e) {
 //     const { target: { files } } = e;

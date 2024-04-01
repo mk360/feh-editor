@@ -14,6 +14,12 @@ html {
     position: absolute;
 }
 
+.display-cell {
+    display: unset;
+    top: 0;
+    left: 0;
+}
+
 .defensive-image.display, .trench-image.display {
     display: unset;
 }
@@ -38,7 +44,7 @@ h4 {
     margin-top: 10px;
 }
 
-.tile-property + label {
+.tile-property:not(:disabled) + label {
     cursor: pointer;
 }
 
@@ -62,6 +68,10 @@ h4 {
     background-image: url("./assets/checkbox.png");
 }
 
+.tile-property:disabled + label .checkbox-img {
+    filter: grayscale(1) brightness(50%);
+}
+
 .tile-button:hover, .tile-type:checked + label {
     background-image: url("./assets/button-background.png");
     background-size: 130% 110%;
@@ -81,8 +91,8 @@ h4 {
 }
 
 .square {
-    height: 90px;
-    width: 90px;
+    height: 88px;
+    width: 88px;
     position: relative;
 }
 
@@ -105,11 +115,12 @@ h4 {
 #map-container {
     outline: solid 1px #f9f4e399;
     border-radius: 8px;
-    width: 540px;
-    height: 720px;
     background-color: #27393bcc;
     overflow-y: auto;
     overflow-x: hidden;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(8, 1fr); 
     box-shadow: inset 2px 2px 8px 0px #00000080;
 }
 
@@ -170,8 +181,9 @@ body {
 }
 
 .map-tile {
-    height: 90px;
-    width: 90px;
+    height: 92px;
+    width: 92px;
+    padding: 0;
     background: none;
     outline: none;
     border: 1px solid white;
@@ -207,11 +219,6 @@ body {
 
 .tile-type + label:hover {
     cursor: pointer;
-}
-
-.highlighted {
-    background-image: url("./assets/tile-highlight.png");
-    filter: brightness(1.5) hue-rotate(220deg);
 }
 
 .map-tile:hover {
@@ -286,4 +293,13 @@ input[name='team-slot']:hover + label, input[name='team-slot']:checked + label {
 
 .team-slot {
     display: none;
+}
+
+.save-button {
+    background-image: url("./assets/save-button.png");
+    padding: 10px 70px;
+    background-color: transparent;
+    border: none;
+    background-size: cover;
+    color: inherit;
 }
