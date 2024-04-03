@@ -17,6 +17,12 @@ for (let y = 1; y <= 8; y++) {
         btn.id = `${x}-${y}`;
         btn.classList.add("map-tile");
         mapBackground.appendChild(btn);
+        displayTileSettings({
+            defensive: false,
+            trench: false,
+            tileType: "ground",
+            id: btn.id
+        });
     }
 }
 
@@ -90,38 +96,77 @@ defensiveCheckbox.onchange = function(e) {
 }
 
 mapBackground.oncontextmenu = function(e) {
-    console.log(e);
     e.preventDefault();
 }
 
-mapBackground.onclick = function(e) {
-    const btn = e.target;
-    const [x, y] = btn.id.split("-").map(Number);
-    const tileIndex = getTileIndex(x, y) - 1;
-    const tile = tiles[tileIndex];
-    const selectedTileType = document.querySelector("input[name='tile-type']:checked").id;
-    const teamSlotElement = document.querySelector("input[name='team-slot']:checked");
-    const saveData = {
-        tileType: selectedTileType,
-        defensive: defensiveCheckbox.checked,
-        trench: trenchCheckbox.checked,
-    };
-    if (teamSlotElement) {
-        let teamSlot = teamSlotElement.id;
-        const [slot, team] = teamSlot.split("-");
-        teamSlots[team][+slot] = {
-            x,
-            y
-        };
+function getParentButton(element) {
+    let node = element;
+    while (element.parentNode) {
+        node = node.parentNode;
+        if (!node) return null;
+        if (node.nodeName === "BUTTON") return node;
     }
-    tiles[tileIndex] = saveData;
+    return null;
+}
 
-    displayTileSettings({
-        defensive: defensiveCheckbox.checked,
-        trench: trenchCheckbox.checked,
-        tileType: selectedTileType,
-        id: btn.id
-    });
+function clearCell(mouseEvent) {
+    const btn = getParentButton(mouseEvent.target);
+    if (btn) {
+        const [x, y] = btn.id.split("-").map(Number);
+        const tileIndex = getTileIndex(x, y);
+        const tile = tiles[tileIndex];
+    }
+}
+
+function paintCell(mouseEvent) {
+    const btn = getParentButton(mouseEvent.target);
+    console.log(btn, mouseEvent);
+    if (btn) {
+        const [x, y] = btn.id.split("-").map(Number);
+        const tileIndex = getTileIndex(x, y) - 1;
+        const tile = tiles[tileIndex];
+        const selectedTileType = document.querySelector("input[name='tile-type']:checked").id;
+        const teamSlotElement = document.querySelector("input[name='team-slot']:checked");
+        const saveData = {
+            tileType: selectedTileType,
+            defensive: defensiveCheckbox.checked,
+            trench: trenchCheckbox.checked,
+        };
+        if (teamSlotElement) {
+            let teamSlot = teamSlotElement.id;
+            const [slot, team] = teamSlot.split("-");
+            teamSlots[team][+slot] = {
+                x,
+                y
+            };
+        }
+        tiles[tileIndex] = saveData;
+
+        displayTileSettings({
+            defensive: defensiveCheckbox.checked,
+            trench: trenchCheckbox.checked,
+            tileType: selectedTileType,
+            id: btn.id
+        });
+    }
+}
+
+mapBackground.onclick = paintCell;
+
+mapBackground.onmousedown = function(e) {
+    if (e.buttons === 1) {
+        paintCell(e);
+    } else if (e.buttons === 2) {
+
+    }
+};
+
+mapBackground.onmouseover = function(e) {
+    if (e.buttons === 1) {
+        paintCell(e);
+    } else if (e.buttons === 2) {
+
+    }
 };
 
 function displayTileSettings({ defensive, trench, tileType, id }) {
