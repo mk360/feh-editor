@@ -114,13 +114,23 @@ function clearCell(mouseEvent) {
     if (btn) {
         const [x, y] = btn.id.split("-").map(Number);
         const tileIndex = getTileIndex(x, y);
-        const tile = tiles[tileIndex];
+        tiles[tileIndex] = {
+            tileType: "ground",
+            defensive: false,
+            trench: false,
+        };
+
+        displayTileSettings({
+            id: btn.id,
+            defensive: false,
+            trench: false,
+            tileType: "ground"
+        });
     }
 }
 
 function paintCell(mouseEvent) {
     const btn = getParentButton(mouseEvent.target);
-    console.log(btn, mouseEvent);
     if (btn) {
         const [x, y] = btn.id.split("-").map(Number);
         const tileIndex = getTileIndex(x, y) - 1;
@@ -134,8 +144,14 @@ function paintCell(mouseEvent) {
         };
         if (teamSlotElement) {
             let teamSlot = teamSlotElement.id;
-            const [slot, team] = teamSlot.split("-");
-            teamSlots[team][+slot] = {
+            const [, team, slot] = teamSlot.split("-");
+            if (teamSlots[`team${team}`][+slot - 1]) {
+                const { x, y } = teamSlots[`team${team}`][+slot - 1];
+                const existingSlotTile = document.getElementById(`${x}-${y}`);
+                existingSlotTile.getElementsByClassName("summoner-slot")[0].remove();
+                existingSlotTile.getElementsByClassName("grid-summoner")[0].remove();
+            }
+            teamSlots[`team${team}`][+slot - 1] = {
                 x,
                 y
             };
@@ -146,7 +162,8 @@ function paintCell(mouseEvent) {
             defensive: defensiveCheckbox.checked,
             trench: trenchCheckbox.checked,
             tileType: selectedTileType,
-            id: btn.id
+            id: btn.id,
+            teamSlot: teamSlotElement?.id
         });
     }
 }
@@ -157,7 +174,7 @@ mapBackground.onmousedown = function(e) {
     if (e.buttons === 1) {
         paintCell(e);
     } else if (e.buttons === 2) {
-
+        clearCell(e);
     }
 };
 
@@ -165,11 +182,11 @@ mapBackground.onmouseover = function(e) {
     if (e.buttons === 1) {
         paintCell(e);
     } else if (e.buttons === 2) {
-
+        clearCell(e);
     }
 };
 
-function displayTileSettings({ defensive, trench, tileType, id }) {
+function displayTileSettings({ defensive, trench, tileType, id, teamSlot }) {
     const button = document.getElementById(id);
     while (button.children.length) {
         button.removeChild(button.firstChild);
@@ -189,6 +206,19 @@ function displayTileSettings({ defensive, trench, tileType, id }) {
         trenchImage.classList.add("trench-image", "display-cell");
         trenchImage.src = "./assets/trench.png";
         div.appendChild(trenchImage);
+    }
+
+    if (teamSlot) {
+        const [, team, slot] = teamSlot.split("-");
+        const imgUrl = team === "1" ? './assets/blue-summoner.png' : './assets/red-summoner.png';
+        const summonerImg = document.createElement("img");
+        summonerImg.src = imgUrl;
+        summonerImg.classList.add("grid-summoner");
+        const summonerSlot = document.createElement("div");
+        summonerSlot.innerText = slot;
+        summonerSlot.classList.add("summoner-slot");
+        div.appendChild(summonerImg);
+        div.appendChild(summonerSlot);
     }
 
     button.appendChild(div);
