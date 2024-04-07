@@ -1,11 +1,12 @@
 ## FEH Map Editor
+
 A map editor that integrates [into the game engine](https://github.com/mk360/feh-battles).
 
 ### How to use
 
-- Load a map file, ideally a 540x720 image ripped from the game's assets.
-- Click on each tile, set its properties. If applicable, you can set it as a starting point for either of the two teams.
-- Tiles should be manually saved.
+- Choose a map file.
+- Configure tile customizations, and apply them to the tile of your choice. You can hold left click to "paint" multiple tiles, you can right-click to reset a tile, you can hold right-click to reset multiple tiles.
+- Then press Save when you're done.
 
 The app will generate an appropriately-formatted JSON file, that you can integrate in the repository's maps data.
 
