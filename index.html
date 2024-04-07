@@ -2,8 +2,13 @@
 <html>
     <head>
         <link rel="stylesheet" href="./index.css" />
+        <link rel="stylesheet" href="./background-modal.css" />
     </head>
     <body>
+        <div  class="marth hero"></div>
+        <div class="lucina hero"></div>
+        <div class="ephraim hero"></div>
+        <div class="sharena hero"></div>
         <div>
             <h3 class="section">
                 Tile Type
@@ -100,19 +105,22 @@
         <div id="map">
             <div id="map-editor-bg">
                 <div id="map-container">
-                    <img id="map-bg" alt="" src="" />
+                    <div id="map-grid">
+                        <img id="map-bg" alt="" src="" />
+                    </div>
                 </div>
                 <div id="map-tools">
-                    <button>Set Background</button>
+                    <button id="set-background">Set Background</button>
                     <div style="display: flex">
                         <button>Previous Background</button>
                         <button>Next Background</button>
                     </div>
-                    <button class="save-button">Save</button>
+                    <button id="save-button">Save</button>
                 </div>
             </div>
         </div>
-        <script src="./dom.js"></script>
+        <script src="./controls.js"></script>
+        <script src="./background-modal.js"></script>
         <script src="./data.js"></script>
     </body>
 </html>

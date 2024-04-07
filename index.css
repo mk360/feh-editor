@@ -5,6 +5,7 @@
 
 html {
     font-size: 20px;
+    overflow: hidden;
 }
 
 .defensive-image, .trench-image {
@@ -56,6 +57,11 @@ html {
 
 .tile-property {
     display: none;
+}
+
+.tile-property + label {
+    margin-top: 15px;
+    display: inline-block;
 }
 
 h4 {
@@ -131,16 +137,20 @@ h4 {
     outline: 1px solid black;
 }
 
-#map-container {
+#map-grid {
+    position: relative;
     outline: solid 1px #f9f4e399;
     border-radius: 8px;
     background-color: #27393bcc;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(8, 1fr); 
     box-shadow: inset 2px 2px 8px 0px #00000080;
+}
+
+#map-container {
+    position: relative;
 }
 
 #map-tools {
@@ -156,10 +166,8 @@ h4 {
 
 #map-bg {
     position: absolute;
-    z-index: -1;
-    height: 720px;
-    width: 540px;
-    margin-bottom: 50px;
+    height: 100%;
+    width: 100%;
 }
 
 #prompt-input {
@@ -183,7 +191,7 @@ body {
     display: flex;
     justify-content: space-around;
     background-image: url("./assets/bg.png");
-    overflow-x: hidden;
+    padding: 0 24px;
     font-family: FEH;
     color: white;
     -webkit-text-stroke-width: 0.5px;
@@ -221,7 +229,7 @@ body {
 }
 
 .ground {
-    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid white;
 }
 
 .tile-type {
@@ -321,4 +329,42 @@ input[name='team-slot']:hover + label, input[name='team-slot']:checked + label {
     border: none;
     background-size: cover;
     color: inherit;
+}
+
+.hero {
+    position: absolute;
+    z-index: -1;
+    background-size: cover;
+}
+
+.ephraim {
+    left: -245px;
+    top: -10px;
+    height: 806px;
+    width: 613px;
+    background-image: url("./assets/Ephraim_Restoration_Lord_Face.webp");
+}
+
+.sharena {
+    left: -245px;
+    top: 460px;
+    height: 806px;
+    width: 613px;
+    background-image: url("./assets/Sharena_Princess_of_Askr_Face.webp");
+}
+
+.marth {
+    right: -180px;
+    top: -10px;
+    height: 806px;
+    width: 613px;
+    background-image: url("./assets/Marth_Altean_Prince_Face.webp");
+}
+
+.lucina {
+    right: -180px;
+    top: 460px;
+    height: 806px;
+    width: 613px;
+    background-image: url("./assets/Lucina_Future_Witness_Face.webp");
 }

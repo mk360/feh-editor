@@ -1,11 +1,11 @@
-const mapBackground = document.getElementById("map-container");
+const mapGrid = document.getElementById("map-grid");
 const defensiveCheckbox = document.getElementById("defensive");
 const trenchCheckbox = document.getElementById("trench");
 const tileTypeSelectors = document.querySelectorAll("input[name='tile-type']");
 const sideSelector = document.getElementById("team");
 const teamSlotSelectors = document.querySelectorAll("input[name='team-slot']");
 // const saveTileButton = document.getElementById("save");
-const exportMapButton = document.getElementById("export");
+const saveButton = document.getElementById("save-button");
 
 function getTileIndex(x, y) {
     return (y - 1) * 6 + x;
@@ -16,7 +16,7 @@ for (let y = 1; y <= 8; y++) {
         const btn = document.createElement("button");
         btn.id = `${x}-${y}`;
         btn.classList.add("map-tile");
-        mapBackground.appendChild(btn);
+        mapGrid.appendChild(btn);
         displayTileSettings({
             defensive: false,
             trench: false,
@@ -95,7 +95,7 @@ defensiveCheckbox.onchange = function(e) {
     }
 }
 
-mapBackground.oncontextmenu = function(e) {
+mapGrid.oncontextmenu = function(e) {
     e.preventDefault();
 }
 
@@ -168,9 +168,9 @@ function paintCell(mouseEvent) {
     }
 }
 
-mapBackground.onclick = paintCell;
+mapGrid.onclick = paintCell;
 
-mapBackground.onmousedown = function(e) {
+mapGrid.onmousedown = function(e) {
     if (e.buttons === 1) {
         paintCell(e);
     } else if (e.buttons === 2) {
@@ -178,7 +178,7 @@ mapBackground.onmousedown = function(e) {
     }
 };
 
-mapBackground.onmouseover = function(e) {
+mapGrid.onmouseover = function(e) {
     if (e.buttons === 1) {
         paintCell(e);
     } else if (e.buttons === 2) {
@@ -237,14 +237,14 @@ function displayTileSettings({ defensive, trench, tileType, id, teamSlot }) {
     // reader.readAsDataURL(files[0]);
 // };
 
-// exportMapButton.onclick = function() {
-//     const obj = getMapObject();
-//     const objString = JSON.stringify(obj, null, 2);
-//     const dataString = `data:text/json;charset=utf-8,${encodeURIComponent(objString)}`;
-//     const anchor = document.createElement("a");
-//     anchor.download = filename;
-//     anchor.href = dataString;
-//     document.body.appendChild(anchor);
-//     anchor.click();
-//     anchor.remove();
-// }
+saveButton.onclick = function() {
+    const saveData = getMapObject();
+    const objString = JSON.stringify(saveData, null, 2);
+    const dataString = `data:text/json;charset=utf-8,${encodeURIComponent(objString)}`;
+    const anchor = document.createElement("a");
+    anchor.download = filename;
+    anchor.href = dataString;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+}
