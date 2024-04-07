@@ -147,8 +147,8 @@ function paintCell(mouseEvent) {
             if (teamSlots[`team${team}`][+slot - 1]) {
                 const { x, y } = teamSlots[`team${team}`][+slot - 1];
                 const existingSlotTile = document.getElementById(`${x}-${y}`);
-                existingSlotTile.getElementsByClassName("summoner-slot")[0].remove();
-                existingSlotTile.getElementsByClassName("grid-summoner")[0].remove();
+                if (existingSlotTile.getElementsByClassName("summoner-slot")[0]) existingSlotTile.getElementsByClassName("summoner-slot")[0].remove();
+                if (existingSlotTile.getElementsByClassName("grid-summoner")[0]) existingSlotTile.getElementsByClassName("grid-summoner")[0].remove();
             }
             teamSlots[`team${team}`][+slot - 1] = {
                 x,
@@ -156,6 +156,8 @@ function paintCell(mouseEvent) {
             };
         }
         tiles[tileIndex] = saveData;
+
+        console.log(teamSlotElement);
 
         displayTileSettings({
             defensive: defensiveCheckbox.checked,
