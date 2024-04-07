@@ -15,20 +15,8 @@ function getMapObject() {
     const json = {
         tileData: [],
         spawnLocations: {
-            team1: teamSlots.team1.map((tile) => {
-                const [x, y] = tile.split("-");
-                return {
-                    x: +x,
-                    y: +y,
-                };
-            }),
-            team2: teamSlots.team2.map((tile) => {
-                const [x, y] = tile.split("-");
-                return {
-                    x: +x,
-                    y: +y,
-                };
-            }),
+            team1: teamSlots.team1.filter((t) => t),
+            team2: teamSlots.team2.filter((t) => t)
         }
     };
 

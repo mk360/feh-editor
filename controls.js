@@ -242,7 +242,7 @@ saveButton.onclick = function() {
     const objString = JSON.stringify(saveData, null, 2);
     const dataString = `data:text/json;charset=utf-8,${encodeURIComponent(objString)}`;
     const anchor = document.createElement("a");
-    anchor.download = filename;
+    anchor.download = document.getElementById("map-bg").src.split("/").pop().replace(".webp", "") + ".json";
     anchor.href = dataString;
     document.body.appendChild(anchor);
     anchor.click();
