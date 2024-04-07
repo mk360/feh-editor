@@ -15,10 +15,19 @@ document.getElementById("set-background").onclick = function() {
     backgroundSelector.onclick = function(e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
+        resetMapData();
         const button = getPreviewMapButtonElement(e.target);
         const chosenMap = button.id;
         document.getElementById("map-bg").src = `./assets/maps/${chosenMap}.webp`;
         backgroundSelector.remove();
+        Array.from(document.getElementsByClassName("map-tile")).forEach((tile) => {
+            while (tile.firstChild) tile.removeChild(tile.firstChild);
+            const recreatedSlot = document.createElement("div");
+            recreatedSlot.classList.add("square", "ground");
+            tile.appendChild(recreatedSlot);
+        });
+
+
     };
 
     parentContainer.appendChild(backgroundSelector);

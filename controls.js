@@ -134,7 +134,6 @@ function paintCell(mouseEvent) {
     if (btn) {
         const [x, y] = btn.id.split("-").map(Number);
         const tileIndex = getTileIndex(x, y) - 1;
-        const tile = tiles[tileIndex];
         const selectedTileType = document.querySelector("input[name='tile-type']:checked").id;
         const teamSlotElement = document.querySelector("input[name='team-slot']:checked");
         const saveData = {
@@ -223,19 +222,6 @@ function displayTileSettings({ defensive, trench, tileType, id, teamSlot }) {
 
     button.appendChild(div);
 }
-
-// document.getElementById("prompt-input").onchange = function(e) {
-//     const { target: { files } } = e;
-//     const reader = new FileReader();
-    // reader.onload = function() {
-    //     document.getElementById("map-bg").src = reader.result;
-    //     document.getElementById("map-bg").alt = files[0].name;
-    //     document.body.removeChild(document.getElementById("load-map"));
-    //     filename = files[0].name.replace("webp", "json");
-    // };
-
-    // reader.readAsDataURL(files[0]);
-// };
 
 saveButton.onclick = function() {
     const saveData = getMapObject();
