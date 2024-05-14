@@ -157,8 +157,6 @@ function paintCell(mouseEvent) {
         }
         tiles[tileIndex] = saveData;
 
-        console.log(teamSlotElement);
-
         displayTileSettings({
             defensive: defensiveCheckbox.checked,
             trench: trenchCheckbox.checked,
