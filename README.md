@@ -16,4 +16,4 @@ The void tile type applies to all tiles that only fliers can cross: lava, oceans
 
 ## Credits
 
-- My friend [Capucine Debever](www.linkedin.com/in/capucine-debever-576055200) for the amazing UI design.
+- My friend [Capucine Debever](https://www.linkedin.com/in/capucine-debever-576055200) for the amazing UI design.
