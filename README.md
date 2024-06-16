@@ -13,3 +13,7 @@ The app will generate an appropriately-formatted JSON file, that you can integra
 ### Wall / Void
 
 The void tile type applies to all tiles that only fliers can cross: lava, oceans, mountains. The wall type applies to all tiles that no one can cross.
+
+## Credits
+
+- My friend [Capucine Debever](www.linkedin.com/in/capucine-debever-576055200) for the amazing UI design.
